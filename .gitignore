@@ -1,0 +1,56 @@
+# ============================================================
+# .gitignore — persona-builder-project
+# 個人情報・患者情報・未公開原稿を含む可能性のあるファイルを除外
+# ============================================================
+
+# --- 和文コーパス（患者情報・未公開原稿を含む可能性があるため） ---
+japanese-corpus/01_papers/*
+japanese-corpus/02_reviews/*
+japanese-corpus/03_blog/*
+japanese-corpus/04_sns/*
+# フォルダ構造とREADMEは保持
+!japanese-corpus/**/.gitkeep
+!japanese-corpus/README.md
+
+# --- 中間成果物（業績情報・スタイル分析結果に個人情報を含むため） ---
+outputs/*
+!outputs/README.md
+!outputs/.gitkeep
+
+# --- ペルソナ本体（個人情報を含むため、テンプレート以外は除外） ---
+# 注: テンプレート状態の persona.md を Push したい場合はこの行をコメントアウト
+# persona.md
+
+# --- 進捗ログ（個別の進捗情報を含むため任意で除外） ---
+# 注: テンプレート状態の PROGRESS.md を Push する場合はコメントアウトのまま
+# PROGRESS.md
+
+# --- macOS ---
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# --- エディタ・IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- Python（PDF/docx処理用ツールが残す可能性） ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+
+# --- Node.js（万が一） ---
+node_modules/
+npm-debug.log*
+
+# --- 一時ファイル ---
+*.tmp
+*.bak
+*.log
