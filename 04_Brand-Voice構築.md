@@ -4,6 +4,8 @@
 
 対象者の **書き言葉スタイル** を、**4段階の段階的アプローチ**で構造化されたスタイルガイドに変換します。本人文書を過度に模倣せず、アカデミックライティングとして妥当な範囲で選好を反映させるのが目的です。
 
+**v2.3 の重要変更（逐次追記方式）**: 各サブ段階の完了時に persona.md の該当セクション（B-7/B-8/B-9/B-10）へ **即追記** します。途中で中断しても作業内容は保持され、再開可能です（拒否モードの場合は Step 5 で一括書き込み）。
+
 ## 設計の考え方（重要）
 
 スタイルガイドは「本人が自覚していること」と「自覚していないこと」の両方から成り立ちます。1段階だけでは抽出が不十分なので、**段階を分けて精度を上げる** 設計を採ります。
@@ -286,32 +288,72 @@ A. 完成稿のみ / B. 修正稿＋主な変更点 / C. 修正稿＋理由 / D.
 
 目的：実際の出力に対する **違和感** を確認し、暫定スタイルガイドを微調整する。第2段階のサンプルがあればそれを素材に使い、なければ Cowork が汎用サンプルを提示する。
 
-### 汎用サンプル（第2段階のサンプル提供がない場合）
+### 評価の構成（言語別）
 
-**元文**
+リライト評価は **言語ごと** に評価軸が異なるため、和文と英文を **分けて** 提示します（v2.3 変更点）。
+
+| トラック | 必須/任意 | 内容 |
+|---|---|---|
+| 和文トラック | 必須 | 同じ和文元文に対する3案（簡潔・学術的 / 説明的・自然 / 論文調・慎重） |
+| 英文トラック | 任意 | 同じ英文元文に対する3案（concise / descriptive / formal-cautious）。英文機会が少ない利用者はスキップ可 |
+
+評価結果は言語別に persona.md の B-9 へ格納します（和文選好と英文選好を分離して記録）。
+
+---
+
+### 和文トラック（必須）
+
+#### 元文
 
 > AI を用いた内視鏡診断は近年注目されている。大腸ポリープの検出に有用である可能性があり、複数の研究で検討されている。しかし、実臨床でどの程度有用かはまだ十分に分かっていない。
 
-**リライト案A（簡潔・学術的）**
+#### リライト案A（簡潔・学術的）
 
 > AI 支援内視鏡診断は、大腸ポリープ検出を改善する可能性がある。一方で、実臨床における有用性については、さらなる検証が必要である。
 
-**リライト案B（説明的・自然）**
+#### リライト案B（説明的・自然）
 
 > AI を用いた内視鏡診断は、大腸ポリープの検出を支援する技術として注目されている。これまでの研究では有用性が示唆されているが、実臨床でどの程度効果を発揮するかについては、なお検証が必要である。
 
-**リライト案C（論文調・慎重・英文）**
+#### リライト案C（論文調・慎重）
 
-> AI-assisted endoscopic diagnosis has been investigated as a potential approach to improving colorectal polyp detection. Although previous studies have suggested its clinical utility, further evidence is needed to determine its effectiveness in routine practice.
+> AI 支援内視鏡診断は、大腸ポリープ検出の補助手段として検討されてきた。先行研究では有用性が示唆されているものの、日常診療における有効性を結論づけるにはさらなるエビデンスが必要である。
 
-### 評価項目（Visualizer フォーム）
+---
+
+### 英文トラック（任意）
+
+英文での執筆機会がある利用者向け。スキップ可。
+
+#### Source text
+
+> AI-based endoscopic diagnosis has attracted attention in recent years. It may be useful for detecting colorectal polyps and has been investigated in several studies. However, its actual utility in clinical practice remains insufficiently understood.
+
+#### Rewrite A（concise・academic）
+
+> AI-assisted endoscopic diagnosis may improve colorectal polyp detection. However, further evidence is needed to confirm its utility in routine clinical practice.
+
+#### Rewrite B（descriptive・readable）
+
+> AI-based endoscopic diagnosis has emerged as a promising technique for supporting colorectal polyp detection. Although previous studies have indicated its potential utility, the extent of its effectiveness in everyday clinical practice still requires further investigation.
+
+#### Rewrite C（formal・cautious・論文調）
+
+> AI-assisted endoscopic diagnosis has been investigated as a potential approach to improving colorectal polyp detection. Although prior studies have suggested its clinical utility, further evidence is required to determine its effectiveness in routine practice.
+
+---
+
+### 評価項目（Visualizer フォーム・言語トラックごと）
+
+各トラックで以下を収集します。
 
 1. **最も好みに近い案**：A / B / C / どれも好みではない / 用途による
 2. **好みだった理由**：簡潔だから / 論理が明確だから / 慎重な表現だから / 自然に読めるから / 学術的だから / 読者に伝わりやすいから / その他
 3. **違和感がある点**：硬すぎる / 柔らかすぎる / 短すぎる / 長すぎる / 断定が強すぎる / 慎重すぎる / 論理が飛んでいる / 用語が不自然 / 特にない
-4. **次回以降の修正方針**：もっと短く / もう少し説明を加える / より学術的に / より自然な日本語に / より英語論文らしく / 断定を弱める / 断定を強める / 箇条書きを減らす / 箇条書きを増やす / 語尾や表現を統一
+4. **次回以降の修正方針**（和文）：もっと短く / もう少し説明を加える / より学術的に / より自然な日本語に / 断定を弱める / 断定を強める / 箇条書きを減らす / 箇条書きを増やす / 語尾や表現を統一
+5. **次回以降の修正方針**（英文）：more concise / add more context / more formal / more native-like / hedge more / assert more / vary sentence structure / standardize terminology
 
-リライト評価結果は persona.md の B-8（リライト評価結果）に **ルール文として** 格納する。
+リライト評価結果は **和文選好と英文選好を分離** して persona.md の B-9（リライト評価結果）に **ルール文として** 格納する。英文トラックをスキップした場合は B-9 の英文欄を `（未実施：英文トラックスキップ）` と明記する。
 
 ---
 
@@ -379,11 +421,20 @@ A. 完成稿のみ / B. 修正稿＋主な変更点 / C. 修正稿＋理由 / D.
 
 ### 4. リライト評価（第4段階）
 
-サンプル提供があればそれを、なければ上記汎用サンプルを使い、A/B/C の3案を提示。4項目の評価を Visualizer で収集。
+**和文トラック（必須・3案 A/B/C）** を提示し評価を収集。続いて利用者に **英文トラック実施の有無** を確認し、希望があれば **英文3案 A/B/C** も提示。英文機会の少ない利用者はスキップ可。Visualizer で言語ごとに評価を分けて収集。
 
-### 5. 暫定スタイルガイド生成
+### 5. 各サブ段階完了時の逐次追記（v2.3）
 
-第1・3・4段階の結果を **ルール文形式** に整形して、persona.md の Part B に書き込む（書き込み許可確認は Step 5 で行う）。
+逐次追記モード同意済みなら、各サブ段階完了時に persona.md の該当セクションへ即追記します。
+
+| サブ段階 | 完了時の追記先 | 同時に更新する進行状況サマリ |
+|---|---|---|
+| 第1段階 | **B-7**（質問票回答）。プリセット選択時は採用プリセットとデフォルト値、カスタム時は15問回答。該当時 B-1〜B-6 を本人選好で上書き | Step 4 第1段階 `[x]` / 再開位置を「Step 4 第3段階」へ |
+| 第3段階 | **B-8**（A/B 選好結果10問 + ルール化サマリ） | Step 4 第3段階 `[x]` / 再開位置を「Step 4 第4段階」へ |
+| 第4段階 | **B-9**（リライト評価結果）。明確な傾向が出なければ B-11 の初学者デフォルト適用判定も更新 | Step 4 第4段階 `[x]` / 再開位置を「Step 4 第2段階（任意）または Step 5」へ |
+| 第2段階（任意） | **B-10**（サンプル由来の補正・最大5件） | Step 4 第2段階 `[x]` / 再開位置を「Step 5」へ |
+
+各追記後、進行状況サマリの「最終更新日時」も更新します。**サブ段階単位で追記済みのため、途中中断しても次回セッションでその次の段階から再開できます**。
 
 ### 6. 任意：サンプル補正（第2段階）
 
@@ -391,14 +442,14 @@ A. 完成稿のみ / B. 修正稿＋主な変更点 / C. 修正稿＋理由 / D.
 
 ### 7. PROGRESS.md 追記
 
-Step 4 完了時に以下を追記する。
+各サブ段階完了時に該当項目を追記する（一括ではなく逐次）。
 
-- 第1段階 完了（プリセット種別 アカデミック / 臨床・実務 / カジュアル / カスタム15問、上書き項目数）
-- 第3段階 完了（A/B 主要傾向）
-- 第4段階 完了（採用したリライト案）
-- 第2段階 実施 有 / 無 / 後日
+- 第1段階 完了（プリセット種別 アカデミック / 臨床・実務 / カジュアル / カスタム15問、上書き項目数、B-7 追記済み）
+- 第3段階 完了（A/B 主要傾向、B-8 追記済み）
+- 第4段階 完了（採用したリライト案、B-9 追記済み）
+- 第2段階 実施 有 / 無 / 後日（実施時は B-10 追記済み）
 - 初学者デフォルト適用 有 / 無
-- 完了日時
+- 各サブ段階の完了日時
 
 ---
 
